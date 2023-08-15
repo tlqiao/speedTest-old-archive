@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="566e291a-1117-49f7-b803-09778533802d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/api/client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/api/example/articleApiCallExample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/api/example/loginApiCallExample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/api/generateCallApiCode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/api/testReqTemplate.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/case/example/articleApiCaseExample.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/case/example/loginApiCaseExample.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/case/generateCaseCode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/config/config_dev.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/config/config_st.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/config/config_uat.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/config/loadConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/createProject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/data/dev/login_user_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/data/loadCSV.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/data/st/login_user_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/data/uat/login_user_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/db/mysqlClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/db/postgresqlClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/db/redisClient.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/api-test-with-js/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/api/apitest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/api/chatWithGPT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/demo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/api.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/mobileui.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/mockserver.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/testcase.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/html/webui.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/script/webui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/apiStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/commonStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/indexStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/mobileUiStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/mockserverStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/testCaseStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/static/style/webUiStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/api-test-with-python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/api-test-with-python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/api-test-with-python/api/article.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/api-test-with-python/api/article.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file:///opt/homebrew/Cellar/go/1.19.1/libexec" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2RUxJZ7LplVRkW3UQKRF6ymlY8T" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/taoli/study/python/test-platform/talk-with-chatgpt&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="566e291a-1117-49f7-b803-09778533802d" name="Changes" comment="" />
+      <created>1687318390395</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687318390395</updated>
+      <workItem from="1687318392452" duration="44000" />
+      <workItem from="1687749548029" duration="35000" />
+      <workItem from="1687752420107" duration="18000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

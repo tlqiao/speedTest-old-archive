@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contract Test Page</title>
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="stylesheet" type="text/css" href="../style/default.min.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+</head>
+<h1 class="header">Contract Test</h1>
+<body>
+<div class="container">
+    <label class="title-label">Initial Project - Scaffold:</label>
+    <form id="generateProjectForContractTest">
+        Tool:
+        <select id="testTool">
+            <option value="pact-js" selected>Pact-JS</option>
+            <!--            <option value="pact-jvm">Pact-JVM</option>-->
+        </select>
+        Project Name:
+        <input type="text" placeholder="Input project name" id="projectName" required>
+        <button type="submit" name="generateProject" value="generate">Generate</button>
+    </form>
+</div>
+</br>
+<div class="container">
+    <label class="title-label">Generate Contract Test</label>
+    <form id="generateCodeForContractTest">
+        <div class="column-half">
+            <div class="row">
+                APIMethod: <select id="apiMethod">
+                <option checked>POST</option>
+                <option>GET</option>
+                <option>PUT</option>
+                <option>DELETE</option>
+            </select>
+                APIUrl: <input class="middle-input" type="text" id="apiUrl" name="apiUrl" placeholder="/xxx/yyy"
+                               required>
+                <button type="submit" name="generateCode" value="generate" id="generateContractTestButton">Generate</button>
+            </div>
+            <div class="row">
+                <label class="default-label">APIRequestBody</label><br>
+                <textarea class="textarea-middle" id="apiRequestBody" name="apiRequestBody"
+                          placeholder="Input json string request body"></textarea>
+            </div>
+            <div class="row">
+                <label class="default-label">APIResponse</label><br>
+                <textarea class="textarea-middle" id="apiResponse" name="apiRequestBody"
+                          placeholder="Input json string response body" required></textarea>
+            </div>
+        </div>
+        <div class="column-half">
+            <div class="row">
+                <br>
+                <br>
+                <label class="default-label">Consumer Test</label>
+                <div class="container-code-middle">
+                    <pre><code id="consumerTest"></code></pre>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("generateProjectForContractTest").addEventListener("submit",
+        function (event) {
+            event.preventDefault(); // Prevent form submission
+            const form = event.target;
+            let type = "contract-test-js";
+            if (form.testTool.value === 'Pact-JS') {
+                type = "contract-test-js"
+            }
+            const data = {
+                projectName: form.projectName.value,
+                type: type,
+            };
+            const url = `http://localhost:3000/api/generateProject?projectName=${encodeURIComponent(data.projectName)}&type=${encodeURIComponent(data.type)}&language=javascript`;
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = `${data.projectName}.zip`;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        });
+    document.getElementById("generateCodeForContractTest").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+        let button = document.getElementById("generateContractTestButton")
+        button.disabled = true; // Disable the submit button
+        try {
+            const form = event.target;
+            const form2 = document.getElementById("generateProjectForContractTest");
+            const generateApiCallCodeUrl = "http://localhost:3000/api/generateContractTest";
+            const data = {
+                apiDetails: {
+                    method: form.apiMethod.value,
+                    url: form.apiUrl.value,
+                    request: form.apiRequestBody.value,
+                    response: form.apiResponse.value
+                },
+                testTool: form2.testTool.value,
+            };
+            fetch(generateApiCallCodeUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Call backend api failed');
+                    }
+                    return response.json();
+                })
+                .then(function (rs) {
+                    console.log(rs)
+                    const code = document.getElementById('consumerTest');
+                    const regex = /\n/g;
+                    const formattedCode = rs.data.replace(regex, '<br>');
+                    code.innerHTML = formattedCode;
+                    button.disabled = false; // Re-enable the submit button
+                })
+        } catch (error) {
+            console.error("Error:", error);
+            button.disabled = false; // Re-enable the submit button
+        }
+    })
+</script>
+</body>
+</html>

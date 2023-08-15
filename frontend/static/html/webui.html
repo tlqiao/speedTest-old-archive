@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebUI Page</title>
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+</head>
+<body>
+<h1 class="header">WebUI Test</h1>
+<div class="container">
+    <label class="title-label">Initial Project - Scaffold:</label>
+    <div class="row">
+        <form id="generateProjectForWebUITest" class="form-inline">
+            Framework: &nbsp;
+            <select id="testFramework">
+                <option value="Cypress" selected>Cypress</option>
+                <!--            <option value="Playwright">Playwright</option>-->
+                <!--            <option value="TestCafe">TestCafe</option>-->
+            </select>
+            Project Name:
+            <input type="text" placeholder="Input project name" id="projectName" required>
+            <button type="submit" name="generateProject" value="generate">Generate</button>
+        </form>
+    </div>
+</div>
+</br>
+<div class="container">
+    <div class="row">
+        <label class="title-label">Generate WebUI Test With LLM</label>
+    </div>
+    <div class="row">
+        <form id="generateLocators">
+            <div class="row">
+                <lable class="middle-label">Generate Locators</lable>
+                <button type="submit" name="generateLocators" id="generateLocatorButton">Generate</button>
+            </div>
+            <div class="row">
+                <div class="column-half">
+                    <label class="default-label">Page Layout</label>
+                </div>
+                <div class="column-half">
+                    <label class="default-label">Output Locators</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-half">
+                    <textarea name="pageLayout" , class="textarea-big" placeholder="Input page layout"
+                              required></textarea>
+                </div>
+                <div class="column-half">
+                    <div class="container-code">
+                        <pre><code name="outputLocators" id="outputLocators"
+                                   class="language-html javascript"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <form id="generateStepFunction">
+    <div class="row">
+        <label class="middle-label">Generate Step Function</label>
+        <button type="submit" name="generateStepFunction" id="generateStepFunctionButton">Generate</button>
+    </div>
+    <div class="row">
+            <div class="col-30">
+                <label class="default-label">Locators</label>
+                <textarea name="inputLocators" class="textarea-big" placeholder="Input page's locators"
+                          required></textarea>
+            </div>
+            <div class="col-20">
+                <label class="default-label">Step Description</label>
+                <textarea name="stepDesc" class="textarea-big" placeholder="Input test step description"
+                          required></textarea>
+            </div>
+            <div class="col-50">
+                <label class="default-label">Step Function</label>
+                <div class="container-code">
+                    <pre><code name="stepFunction" id="stepFunction" class="language-html javascript"></code></pre>
+                </div>
+            </div>
+    </div>
+    </form>
+</div>
+<script>
+    document.getElementById("generateProjectForWebUITest").addEventListener("submit",
+        function (event) {
+            event.preventDefault(); // Prevent form submission
+            const form = event.target;
+            const data = {
+                projectName: form.projectName.value,
+                type: 'web-ui-test',
+                language: 'javascript'
+            };
+            const url = `http://localhost:3000/api/generateProject?projectName=${encodeURIComponent(data.projectName)}&type=${encodeURIComponent(data.type)}&language=${encodeURIComponent(data.language)}`;
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = `${data.projectName}.zip`;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        });
+    const testTool = document.getElementById("testFramework").value
+    let outputLocator = document.getElementById("outputLocators")
+    document.getElementById("generateStepFunction").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+        const form = event.target;
+        const button = document.getElementById('generateLocatorButton');
+        button.disabled = true;
+        try {
+            const data = {
+                "testTool": testTool,
+                "page": form.pageLayout.value
+            };
+            const url = "http://localhost:3000/api/writeWebLocator";
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                throw new Error('Call to generate test cases API failed');
+            }
+            const responseData = await response.json();
+            const regex = /\n/g;
+            const formattedContent = responseData.webLocators.replace(regex, '<br>');
+            outputLocator.innerHTML = formattedContent;
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            button.disabled = false;
+        }
+    });
+    document.getElementById("generateStepFunction").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+        const form = event.target;
+        const button = document.getElementById("generateStepFunctionButton")
+        button.disabled = true;
+        try {
+            let data = {
+                "testTool": testTool,
+                "locators": form.inputLocators.value,
+                "stepDesc": form.stepDesc.value
+            }
+            let url = "http://localhost:3000/api/writeWebStepFunction"
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            })
+            if (!response.ok) {
+                throw new Error('call generate web step function failed');
+            }
+            const responseData = await response.json();
+            const stepFunction = document.getElementById('stepFunction');
+            const regex = /\n/g;
+            const formattedContent = responseData.stepFunction.replace(regex, '<br>');
+            stepFunction.innerHTML = formattedContent;
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            button.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

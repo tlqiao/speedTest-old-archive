@@ -1,0 +1,8 @@
+pytest
+mysql-connector-python
+cryptography
+pytest-html
+jinja2
+pymongo
+redis
+postgresql

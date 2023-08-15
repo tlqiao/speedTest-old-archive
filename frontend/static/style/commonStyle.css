@@ -1,0 +1,254 @@
+title {
+    color: red;
+}
+.header {
+    color: white;
+    text-align: center;
+    background-color: #634F7D;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+body {
+    font-family: Arial;
+    background-color: #EDF1F3;
+    margin: 0;
+}
+
+button {
+    background-color: #003D4F;
+    display: inline-block;
+    padding: 8px 10px;
+    border: 1px;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: white;
+    transition: border-color 0.2s, color 0.2s;
+}
+button:hover {
+    border-color: #666;
+    color: greenyellow;
+}
+button:focus {
+    outline: none;
+    border-color: #999;
+    box-shadow: 0 0 3px #999;
+}
+button:disabled {
+    opacity: 0.5;
+    color: gray;
+    cursor: not-allowed;
+}
+
+.container {
+    max-width: 1900px;
+    margin-top: 0px;
+    padding-left: 5px;
+    background-color: #EDF1F3;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    align-items: center;
+    padding-bottom: 5px;
+    padding-top: 5px
+}
+.column-half {
+    float: left;
+    width: 50%;
+}
+.col-33 {
+    float: left;
+    width: 33%;
+}
+.col-30 {
+    float: left;
+    width: 30%;
+}
+.col-20 {
+    float: left;
+    width: 20%;
+}
+.col-50 {
+    float: left;
+    width: 50%;
+}
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/*.row {*/
+/*    align-items: center;*/
+/*    align-content: center;*/
+/*}*/
+.container-code {
+    height: 400px;
+    scroll-behavior: smooth;
+    border: 1px solid gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: auto;
+    color:#634F7D;
+    font-zise: 24px;
+    font-type: Arial;
+    margin-right: 5px;
+}
+.container-code-big {
+    height: 640px;
+    border: 1px solid gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    scroll-behavior: smooth;
+    overflow: auto;
+    color:#634F7D;
+    font-zise: 30px;
+    font-type: Arial;
+    margin-right: 5px;
+}
+
+.container-code-middle {
+    height: 563px;
+    border: 1px solid gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    scroll-behavior: smooth;
+    overflow: auto;
+    color:#634F7D;
+    font-zise: 30px;
+    font-type: Arial;
+    margin-right: 5px;
+}
+.title-label {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    font-size: 18px;
+    color: #634F7D;
+}
+.default-label {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 16px;
+    color: black;
+    vertical-align: middle;
+}
+.left {
+    horiz-align: right;
+}
+.middle-label {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #003D4F;
+    align-content: center;
+}
+.small-label {
+    font-size: 12px;
+    color: black;
+    display: block;
+}
+.textarea-big {
+    height: 400px;
+    width: 98%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    scroll-behavior: smooth;
+    margin-right: 5px;
+    overflow: auto;
+    color:#003D4F;
+    font-zise: 24px;
+    font-type: Arial;
+}
+.textarea-middle {
+    height: 260px;
+    width: 98%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    scroll-behavior: smooth;
+    margin-right: 5px;
+    overflow: auto;
+    color:#003D4F;
+    font-zise: 24px;
+    font-type: Arial;
+}
+.textarea-biggest {
+    height: 640px;
+    width: 98%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    scroll-behavior: smooth;
+    overflow: auto;
+    color:#003D4F;
+    font-zise: 24px;
+    font-type: Arial;
+}
+.textarea-small {
+    height: 100px;
+    width: 98%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    scroll-behavior: smooth;
+    overflow: auto;
+    color:#003D4F;
+    font-zise: 24px;
+    font-type: Arial;
+}
+p {
+    color: black;
+    font-size: small;
+}
+
+.customer-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #888;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px
+}
+
+select {
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+    margin-left:5px;
+    margin-right: 10px;
+}
+input {
+    height: 25px;
+    width: 150px;
+    font-size: 16px;
+    margin: 5px 10px 5px 5px;
+}
+.long-input {
+    height: 25px;
+    width: 600px;
+    font-size: 16px;
+    margin: 5px 10px 5px 5px;
+}
+
+.middle-input {
+    height: 25px;
+    width: 400px;
+    font-size: 16px;
+    margin: 5px 10px 5px 5px;
+}
+.json-output {
+    white-space: pre-wrap; /* 保持换行和空格 */
+    font-family: monospace;
+    font-size: large;
+}
+code {
+    white-space: pre-wrap; /* 保持换行和空格 */
+    font-family: monospace;
+    font-size: large;
+}
+.context-input {
+    white-space: pre-wrap; /* 保持换行和空格 */
+    font-family: monospace;
+    font-size: large;
+}

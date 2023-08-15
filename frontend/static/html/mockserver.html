@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MockServer Page</title>
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+</head>
+<body>
+<h1 class="header">Setup Mock Server</h1>
+<div class="container">
+    <label class="title-label">Initial Project - Scaffold:</label>
+    <div class="row">
+        <form id="generateMockServer" class="form-inline">
+            Mock Server Tool:
+            <select id="tool">
+                <option value="wiremock" selected>WireMock</option>
+                <!--            <option value="mockserver">MockServer</option>-->
+                <!--            <option value="mountebank">Mountebank</option>-->
+            </select>
+            &nbsp;&nbsp;&nbsp;Project Name:
+            <input type="text" placeholder="Input project name" id="projectName" required>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" name="generateProject" value="generate">Generate</button>
+        </form>
+    </div>
+</div>
+<br>
+<div class="container">
+    <label class="title-label">Generate Mapping File</label>
+    <form id="generateMappingFile">
+        <div class="column-half">
+            <div class="row">
+                APIMethod: <select id="apiMethod" required>
+                <option checked>POST</option>
+                <option>GET</option>
+                <option>PUT</option>
+                <option>DELETE</option>
+            </select>
+                <input type="checkbox" class="customer-checkbox" id="isHeaderMap" name="headerMapping">
+                <label class="default-label">Map Header</label>
+                <input type="checkbox" class="customer-checkbox" id="isCookieMap" name="cookieMapping">
+                <label class="default-label">Map Cookie</label>
+                <input type="checkbox" class="customer-checkbox" id="isUseRegex" name="useRegex">
+                <label class="default-label">Regex Mapping</label>
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" class="left" id="generateMappingFileButton" value="generate">Generate</button>
+            </div>
+            <div class="row">
+                APIUrl: <input type="text" class="long-input" id="apiUrl" name="apiUrl" required>
+            </div>
+            <div class="row">
+                <label class="default-label">API RequestBody</label><br>
+                <textarea class="textarea-middle" id="apiRequestBody" name="apiRequestBody"></textarea>
+            </div>
+            <div class="row">
+                <label class="default-label">API Response</label><br>
+                <textarea class="textarea-middle" id="apiResponse" name="apiResponse"></textarea>
+            </div>
+        </div>
+        <div class="column-half">
+            <div class="row">
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="default-label">WireMock Mapping File</label>
+                <div class="container-code-middle">
+                    <pre id="mappingFile" class="json-output"></pre>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("generateMockServer").addEventListener("submit",
+        function (event) {
+            event.preventDefault(); // Prevent form submission
+            const form = event.target;
+            const data = {
+                projectName: form.projectName.value,
+                type: 'wiremock'
+            };
+            const url = `http://localhost:3000/api/generateProject?projectName=${encodeURIComponent(data.projectName)}&type=${encodeURIComponent(data.type)}&language=javascript`;
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = `${data.projectName}.zip`;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        });
+    document.getElementById("generateMappingFile").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+        let button = document.getElementById("generateMappingFileButton")
+        button.disabled = true; // Disable the submit button
+        try {
+            const form = event.target;
+            const apiDetails = {
+                url: form.apiUrl.value,
+                method: form.apiMethod.value,
+                request: form.apiRequestBody.value,
+                response: form.apiResponse.value
+            };
+            const isMapHeader = document.getElementById("isHeaderMap").checked;
+            const isMapCookie = document.getElementById("isCookieMap").checked;
+            const isUseRegx = document.getElementById("isUseRegex").checked;
+            const body = {
+                isMapHeader: isMapHeader,
+                isMapCookie: isMapCookie,
+                isUseRegex:  isUseRegx,
+                apiDetails: apiDetails
+            };
+
+            const url = "http://localhost:3000/api/writeMappingFile";
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            });
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
+            const jsonResponse = await response.json()
+            const data = JSON.stringify(jsonResponse, null, 2);
+            const mappingFile = document.getElementById('mappingFile');
+            mappingFile.textContent = data;
+            button.disabled = false; // Re-enable the submit button
+        } catch (error) {
+            console.error("Error:", error);
+            button.disabled = false; // Re-enable the submit button
+        }
+    });
+</script>
+</body>
+</html>

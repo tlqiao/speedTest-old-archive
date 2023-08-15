@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Page</title>
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="stylesheet" type="text/css" href="../style/default.min.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+</head>
+<h1 class="header">Unit Test</h1>
+<body>
+<div class="container">
+    <label class="title-label">Generate Unit Test</label>
+    <form id="generateCodeForUnitTest">
+        <div >
+            <div class="row">
+                Language: <select id="language">
+                <option checked>Java</option>
+                <option>Javascript</option>
+            </select>
+                TestType: <select id="testType">
+                <option checked>UnitTest</option>
+                <option>IntegrationTest</option>
+            </select>
+                TestFramework: <select id="testFramework">
+                <option checked>Junit5</option>
+                <option>Junit4</option>
+                <option>Jest</option>
+            </select>
+                MockTool:  <select id="mockTool">
+                <option checked>Mockito</option>
+            </select>
+                <button type="submit" name="generateCode" value="generate" id="generateUnitTestCode">Generate</button>
+            </div>
+        </div>
+        <br>
+            <div class="column-half">
+            <div class="row">
+                <label class="default-label">SourceCode</label><br>
+                <textarea class="textarea-biggest" id="sourceCode" name="sourceCode"
+                          placeholder="Input source code" required></textarea>
+            </div>
+        </div>
+        <div class="column-half">
+            <div class="row">
+                <label class="default-label">Unit Test</label>
+                <div class="container-code-big">
+                    <pre><code id="unitTest" class="language-javascript language-html"></code></pre>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("generateCodeForUnitTest").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent form submission
+        let button = document.getElementById("generateUnitTestCode")
+        button.disabled = true; // Disable the submit button
+        try {
+            const form = event.target;
+            const body = {
+               language: form.language.value,
+               testType: form.testType.value,
+               testFramework: form.testFramework.value,
+               mockTool: form.mockTool.value,
+               sourceCode: form.sourceCode.value
+            };
+
+            const url = "http://localhost:3000/api/writeUnitTest";
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            });
+            if (!response.ok) {
+                throw new Error('API request failed');
+            }
+            const jsonResponse = await response.json()
+            const data = JSON.stringify(jsonResponse, null, 2);
+            const mappingFile = document.getElementById('mappingFile');
+            mappingFile.textContent = data;
+            button.disabled = false; // Re-enable the submit button
+        } catch (error) {
+            console.error("Error:", error);
+            button.disabled = false; // Re-enable the submit button
+        }
+    });
+</script>
+</body>
+</html>

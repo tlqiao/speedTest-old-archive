@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpeedTest Bot</title>
+    <link rel="stylesheet" type="text/css" href="../style/indexStyle.css">
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+</head>
+<h1 class="header">Welcome to SpeedTest Bot</h1>
+<body>
+<nav>
+    <ul>
+        <li><a href="/testCase">Test Case</a></li>
+        <li><a href="/unit">Unit Test</a></li>
+        <li><a href="/api">API Test</a></li>
+        <li><a href="/contract">Contract Test</a></li>
+        <li><a href="/webUI">WebUI Test</a></li>
+        <li><a href="/mobileUI">MobileUI Test</a></li>
+        <li><a href="/mockserver">Mock Server</a></li>
+    </ul>
+</nav>
+<br>
+<div class="container">
+    <label class="small-label">It takes approximately 10-30 seconds to generate result with ChatGPT</label>
+</div>
+<br>
+<div class="flex-container">
+    <div id="testCase" class="div-click">
+        <p class="p-big">Generate Test Case</p>
+        <p class="p-middle">Generate test case with GhatGPT</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Set OPENAI_API_KEY env variable
+            </li>
+            <li class="list-text">
+                Enter requirement, it is better to use english
+            </li>
+            <li class="list-text">
+                Click generate button to get test cases
+            </li>
+        </ul>
+    </div>
+    <div id="unitTest" class="div-click">
+        <p class="p-big">Generate Unit Test Code</p>
+        <p class="p-middle">Generate unit test automatically</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Select test type such as unit test or integration test
+            </li>
+            <li class="list-text">
+                Enter source code
+            </li>
+            <li class="list-text">
+                Click generate button to get unit test
+            </li>
+        </ul>
+    </div>
+    <div id="apiTest" class="div-click">
+        <p class="p-big">Generate API Test Code</p>
+        <p class="p-middle">Generate api test automatically</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Enter project-related info to generate the initial project
+            </li>
+            <li class="list-text">
+                Enter api-related info, parameterFields must be array
+            </li>
+            <li class="list-text">
+                Click generate button to get api test
+            </li>
+        </ul>
+    </div>
+    <div id="contractTest" class="div-click">
+        <p class="p-big">Generate Contract Test</p>
+        <p class="p-middle">Generate contract test automatically</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Enter project-related info to generate the initial project
+            </li>
+            <li class="list-text">
+                Enter api-related info such as api request response
+            </li>
+            <li class="list-text">
+                Click generate button to get contract test
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="flex-container">
+    <div id="webUITest" class="div-click">
+        <p class="p-big">Generate Web UI Code</p>
+        <p class="p-middle">Generate web ui test code with ChatGPT</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Enter project-related info to generate the initial project code
+            </li>
+            <li class="list-text">
+                Set OPENAI_API_KEY env variable
+            </li>
+            <li class="list-text">
+                Input very web page layout to generate locators
+            </li>
+            <li class="list-text">
+                Input locators,step description to generate wrap functions
+            </li>
+        </ul>
+    </div>
+    <div id="mobileUITest" class="div-click">
+        <p class="p-big">Generate Mobile UI Code</p>
+        <p class="p-middle">Generate mobile test code with ChatGPT</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Enter project-related info to generate the initial project code
+            </li>
+            <li class="list-text">
+                Set OPENAI_API_KEY env variable
+            </li>
+            <li class="list-text">
+                Input very mobile screen layout to generate locators
+            </li>
+            <li class="list-text">
+                Input locators,step description to generate wrap functions
+            </li>
+        </ul>
+    </div>
+    <div id="mockServer" class="div-click">
+        <p class="p-big">Generate Mock Server Code</p>
+        <p class="p-middle">Generate mapping file with ChatGPT</p>
+        <ul class="list-style">
+            <li class="list-text">
+                Enter project-related info to generate the initial project code
+            </li>
+            <li class="list-text">
+                Set OPENAI_API_KEY env variable
+            </li>
+            <li class="list-text">
+                Input requirement, it is better to use english
+            </li>
+            <li class="list-text">
+                Click generate button to get mapping file
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    document.getElementById('testCase').addEventListener('click', function() {window.location.href = '/testcase';});
+    document.getElementById('unitTest').addEventListener('click', function() {window.location.href = '/unit';});
+    document.getElementById('apiTest').addEventListener('click', function() {window.location.href = '/api';});
+    document.getElementById('contractTest').addEventListener('click', function() {window.location.href = '/contract';});
+    document.getElementById('webUITest').addEventListener('click', function() {window.location.href = '/webUI';});
+    document.getElementById('mobileUITest').addEventListener('click', function() {window.location.href = '/mobileUI';});
+    document.getElementById('mockServer').addEventListener('click', function() {window.location.href = '/mockserver';});
+</script>
+</body>
+</html>

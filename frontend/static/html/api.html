@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Page</title>
+    <link rel="stylesheet" type="text/css" href="../style/commonStyle.css">
+    <link rel="stylesheet" type="text/css" href="../style/default.min.css">
+    <link rel="icon" href="../icon/icon.png" type="image/x-icon">
+    <!--    <script src="../script/highlight.min.js"></script>-->
+<!--    <script>hljs.highlightAll();-->
+<!--    hljs.initHighlightingOnLoad();</script>-->
+</head>
+<h1 class="header">API Test</h1>
+<body>
+<div class="container">
+    <label class="title-label">Initial Project - Scaffold:</label>
+    <form id="generateProjectForApiTest">
+        Language:
+        <select id="language">
+            <option value="javascript" selected>JavaScript</option>
+            <!--            <option value="python" >Python</option>-->
+        </select>
+        Project Name:
+        <input type="text" placeholder="Input project name" id="projectName" required>
+        <button type="submit" name="generateProject" value="generate">Generate</button>
+    </form>
+</div>
+</br>
+<div class="container">
+    <label class="title-label">Generate API Test</label>
+    <form id="generateCodeForApiTest">
+        <div class="column-half">
+            <div class="row">
+                APIName: <input class="style-default" type="text" id="apiName" name="apiName" required>
+                APIMethod: <select id="apiMethod">
+                <option checked>POST</option>
+                <option>GET</option>
+                <option>PUT</option>
+                <option>DELETE</option>
+            </select>
+                APIUrl: <input class="style-longWidth" type="text" id="apiUrl" name="apiUrl" placeholder="/xxx/yyy"
+                               required>
+                <button type="submit" name="generateCode" value="generate">Generate</button>
+            </div>
+
+            <div class="row">
+                <label class="default-label">ParameterizedFields</label><br>
+                <textarea class="textarea-small" id="parameterizedFields" name="parameterizedFields"
+                          placeholder='["xxx","yyy"]' required></textarea>
+            </div>
+            <div class="row">
+                <label class="default-label">APIRequestBody</label><br>
+                <textarea class="textarea-biggest" id="apiRequestBody" name="apiRequestBody"
+                          placeholder="Input json string request body" required></textarea>
+            </div>
+        </div>
+        <div class="column-half">
+            <div class="row">
+                <label class="default-label">Api call code</label>
+                <div class="container-code">
+                    <pre><code id="apiCallCode" class="language-javascript language-html"></code></pre>
+                </div>
+            </div>
+            <div class="row">
+                <label class="default-label">Test case code</label>
+                <div class="container-code">
+                    <pre><code id="testCaseCode" class="language-html javascript"></code></pre>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("generateProjectForApiTest").addEventListener("submit",
+        function (event) {
+            event.preventDefault(); // Prevent form submission
+            const form = event.target;
+            const data = {
+                projectName: form.projectName.value,
+                type: 'api-test',
+                language: form.language.value
+            };
+            const url = `http://localhost:3000/api/generateProject?projectName=${encodeURIComponent(data.projectName)}&type=${encodeURIComponent(data.type)}&language=${encodeURIComponent(data.language)}`;
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = `${data.projectName}.zip`;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        });
+    document.getElementById("generateCodeForApiTest").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+        const form = event.target;
+        //call api to generate api call code and show it
+        const form2 = document.getElementById("generateProjectForApiTest");
+        const generateApiCallCodeUrl = "http://localhost:3000/api/generateApiCallCode";
+        const generateCaseCodeUrl = "http://localhost:3000/api/generateCaseCode";
+        const sendTemplateFileUrl = "http://localhost:3000/api/sendTemplateFile";
+        const data = {
+            apiInfo: {
+                apiName: form.apiName.value,
+                apiMethod: form.apiMethod.value,
+                apiUrl: form.apiUrl.value,
+                parameterizedFields: JSON.parse(form.parameterizedFields.value),
+                apiRequestBody: JSON.parse(form.apiRequestBody.value)
+            },
+            testType: "api",
+            language: form2.language.value
+        };
+        fetch(generateApiCallCodeUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                const code = document.getElementById('apiCallCode');
+                const regex = /\n/g;
+                const formattedCode = data.code.replace(regex, '<br>');
+                code.innerHTML = formattedCode;
+                // hljs.highlightElement(code);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        //call api to generate test case code and show it
+        const bodyData = {
+            testType: "api",
+            language: form2.language.value,
+            apiInfo: {
+                apiName: form.apiName.value,
+                parameterizedFields: JSON.parse(form.parameterizedFields.value)
+            }
+        }
+        fetch(generateCaseCodeUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bodyData)
+        })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                const code = document.getElementById('testCaseCode');
+                const regex = /\n/g;
+                const formattedCode = data.code.replace(regex, '<br>');
+                code.innerHTML = formattedCode;
+                // hljs.highlightElement(code);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+
+        //send template file
+        const queryData = {
+            apiName: form.apiName.value,
+            testType: 'api',
+            language: form2.language.value
+        };
+        const url = `${sendTemplateFileUrl}?apiName=${encodeURIComponent(queryData.apiName)}&testType=${encodeURIComponent(queryData.testType)}&language=${encodeURIComponent(queryData.language)}`
+        setTimeout(() => {
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = `${queryData.apiName}ReqTemplate.hbs`;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        }, 1000)
+    });
+</script>
+</body>
+</html>

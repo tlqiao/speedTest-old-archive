@@ -1,0 +1,84 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightgray;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #634F7D;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #634F7D;
+    color: white
+}
+
+label {
+    color: #634F7D;
+    font-size: 16px
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-container > div {
+    background-color: lightgray;
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    height: 230px;
+    width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.p-big {
+    color: #F2617A;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    font-style: oblique;
+}
+.p-middle {
+    color: #634F7D;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.list-text{
+    font-size: 14px;
+    color: #003D4F;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.list-style {
+    list-style-type: square;
+    color: #003D4F;
+}
+.list-text:before {
+    content: "\2022";
+    margin-right: 5px;
+}
+.div-click {
+    cursor: pointer;
+    padding: 20px;
+}
+
+.div-click:hover {
+    background-color: whitesmoke;
+    color: white
+}

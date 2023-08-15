@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPathPattern": "/api/addBookWithBasicAuth/([a-z]*)",
+    "bodyPatterns":[{
+      "matchesJsonPath": "$.books",
+      "matchesJsonPath": "$.comment",
+      "matchesJsonPath": "$.books[?(@.names =~ /Name.*/i)]",
+      "matchesJsonPath": "$..price",
+      "matchesJsonPath": "$..author",
+      "matchesJsonPath": "$..[?(@.price<200)]"
+    }],
+    "headers": {
+      "Content-Type": {"equalTo":"application/json"}
+    },
+    "basicAuth": {
+      "username": "apiUsername",
+      "password": "apiPassword"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": "add book with bodyPatterns and basic auth successfully"
+  }
+}
