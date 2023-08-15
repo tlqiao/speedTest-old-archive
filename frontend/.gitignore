@@ -1,0 +1,21 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略构建输出目录
+build/
+dist/
+out/
+public/
+
+# 忽略临时文件
+*.tmp
+
+# 忽略编辑器配置
+.vscode/
+.idea/
+
+# 忽略敏感信息
+secrets.json
+
+# 忽略日志文件
+*.log
