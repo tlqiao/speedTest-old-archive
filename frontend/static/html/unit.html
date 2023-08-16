@@ -15,13 +15,13 @@
             <div class="row">
                 Language: <select id="language">
                 <option checked>Java</option>
-                <option>Javascript</option>
+<!--                <option>Javascript</option>-->
             </select>
                 TestType: <select id="testType">
                 <option checked>UnitTest</option>
                 <option>IntegrationTest</option>
             </select>
-                TestFramework: <select id="testFramework">
+                TestFramework: <select id="testTool">
                 <option checked>Junit5</option>
                 <option>Junit4</option>
                 <option>Jest</option>
@@ -29,6 +29,11 @@
                 MockTool:  <select id="mockTool">
                 <option checked>Mockito</option>
             </select>
+                </select>
+                AssertTool:  <select id="assertTool">
+                <option checked>AssertJ</option>
+            </select>
+
                 <button type="submit" name="generateCode" value="generate" id="generateUnitTestCode">Generate</button>
             </div>
         </div>
@@ -60,12 +65,13 @@
             const body = {
                language: form.language.value,
                testType: form.testType.value,
-               testFramework: form.testFramework.value,
+               testTool: form.testTool.value,
                mockTool: form.mockTool.value,
+               assertTool: form.assertTool.value,
                sourceCode: form.sourceCode.value
             };
 
-            const url = "http://localhost:3000/api/writeUnitTest";
+            const url = "http://localhost:3000/api/generateUnitTest";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -77,9 +83,10 @@
                 throw new Error('API request failed');
             }
             const jsonResponse = await response.json()
-            const data = JSON.stringify(jsonResponse, null, 2);
-            const mappingFile = document.getElementById('mappingFile');
-            mappingFile.textContent = data;
+            const regex = /\n/g;
+            const formattedContent = jsonResponse.unitTest.replace(regex, '<br>');
+            const unitCode = document.getElementById('unitTest');
+            unitCode.innerHTML = formattedContent;
             button.disabled = false; // Re-enable the submit button
         } catch (error) {
             console.error("Error:", error);

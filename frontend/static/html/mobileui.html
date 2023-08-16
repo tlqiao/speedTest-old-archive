@@ -12,13 +12,13 @@
     <div class="row">
         <form id="generateProjectForMobileUITest" class="form-inline">
             Language:
-            <select id="client">
-                <option value="webdriverio" selected>JavaScript</option>
+            <select id="clientTool">
+                <option value="WebdriverIO" selected>WebdriverIO</option>
                 <!--            <option value="Appium-Python-Client" >Python</option>-->
             </select>
             <select id="platform">
                 <option value="Android" selected>Android</option>
-                <option value="IOS">IOS</option>
+                <option value="IOS">iOS</option>
             </select>
             &nbsp;&nbsp;&nbsp;Project Name:
             <input type="text" placeholder="Input project name" id="projectName" required>
@@ -117,7 +117,7 @@
                     console.error('Error occurred:', error);
                 });
         });
-    const clientTool = document.getElementById("client").value
+    const clientTool = document.getElementById("clientTool").value
     const platform = document.getElementById('platform').value
     let outputLocator = document.getElementById("outputLocators")
     document.getElementById("generateLocators").addEventListener("submit", async function (event) {
@@ -141,7 +141,6 @@
                 throw new Error('Failed to call generate test cases API');
             }
             const responseData = await response.json()
-
             const regex = /\n/g;
             const formattedContent = responseData.mobileLocators.replace(regex, '<br>');
             outputLocator.innerHTML = formattedContent;

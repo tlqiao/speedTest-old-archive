@@ -108,3 +108,18 @@ chatWithGPTRouter.post('/api/generateContractTest', (req, res) => {
     )
 })
 
+chatWithGPTRouter.post('/api/generateUnitTest', (req, res) => {
+    const {testTool,language,mockTool,assertTool,testType,sourceCode} = req.body;
+    if (testTool==="" || language ==="" || mockTool==="" || assertTool ==="" || testType==="" || sourceCode==="") {
+        return res.status(403).send({ error: 'Invalid request' });
+    }
+    axios.post(`${backendUrl}/writeUnitTest`, req.body)
+        .then(response => {
+            return res.send(response.data)
+        }).catch(error => {
+            console.error('Error occurred:', error);
+            return res.status(500).send({ error: 'Internal Server Error' });
+        }
+    )
+})
+

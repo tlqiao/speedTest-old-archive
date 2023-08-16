@@ -4,6 +4,7 @@ from mobileui.chains import write_locator_for_mobile_ui, write_step_function_for
 from webui.chains import write_locators_for_web_ui, write_step_function_for_web_ui
 from mockserver.chains import write_mapping_file
 from contract.chains import write_contract_test
+from unit.chains import write_unit_test
 
 app = Flask(__name__)
 
@@ -89,6 +90,22 @@ def write_contract_test_by_chatGPT():
         test_tool, api_details)
     response_data = {
         "data": result
+    }
+    return jsonify(response_data)
+
+
+@app.route('/chatWithGPT/writeUnitTest', methods=['POST'])
+def write_unit_test_by_chatGPT():
+    test_tool = request.get_json().get('testTool')
+    language = request.get_json().get("language")
+    test_type = request.get_json().get("testType")
+    mock_tool = request.get_json().get("mockTool")
+    assert_tool = request.get_json().get("assertTool")
+    source_code = request.get_json().get("sourceCode")
+    result = write_unit_test(
+        test_tool, language, mock_tool, test_type, assert_tool, source_code)
+    response_data = {
+        "unitTest": result
     }
     return jsonify(response_data)
 
