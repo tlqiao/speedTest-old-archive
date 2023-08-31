@@ -1,0 +1,84 @@
+<body>
+    <app-root ng-version="7.2.4">
+        <app-layout-header>
+            <nav class="navbar navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" routerlink="/" href="/">conduit</a><!----><!---->
+                    <ul class="nav navbar-nav pull-xs-right">
+                        <li class="nav-item">
+                            <a class="nav-link" routerlink="/" routerlinkactive="active" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" routerlink="/editor" routerlinkactive="active" href="/editor"><i
+                                    class="ion-compose"></i>&nbsp;New Article
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerlink="/settings" routerlinkactive="active" href="/settings"><i
+                                    class="ion-gear-a"></i>&nbsp;Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerlinkactive="active" href="/profile/demotest2"><!---->
+                                <img class="user-pic" src="https://api.realworld.io/images/smiley-cyrus.jpeg">
+                                demotest2
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </app-layout-header>
+        <router-outlet></router-outlet>
+        <app-editor-page>
+            <div class="editor-page">
+                <div class="container page">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1 col-xs-12">
+                            <app-list-errors><!---->
+                                <ul class="error-messages"><!----></ul>
+                            </app-list-errors>
+                            <form novalidate="" class="ng-pristine ng-valid ng-touched">
+                                <fieldset>
+                                    <fieldset class="form-group">
+                                        <input class="form-control form-control-lg ng-pristine ng-valid ng-touched"
+                                               formcontrolname="title" placeholder="Article Title" type="text">
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <input class="form-control ng-untouched ng-pristine ng-valid"
+                                               formcontrolname="description" placeholder="What's this article about?"
+                                               type="text">
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <textarea class="form-control ng-untouched ng-pristine ng-valid"
+                                                  formcontrolname="body" placeholder="Write your article (in markdown)"
+                                                  rows="8"></textarea>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <input class="form-control ng-untouched ng-pristine ng-valid"
+                                               placeholder="Enter tags" type="text">
+                                        <div class="tag-list"><!----></div>
+                                    </fieldset>
+                                    <button class="btn btn-lg pull-xs-right btn-primary" type="button">Publish Article
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-editor-page>
+        <app-layout-footer>
+            <footer>
+                <div class="container">
+                    <a class="logo-font" routerlink="/" href="/">conduit</a>
+                    <span class="attribution">© 2023. An interactive learning project from <a
+                            href="https://thinkster.io">Thinkster</a>. Code licensed under MIT.
+                    </span>
+                </div>
+            </footer>
+        </app-layout-footer>
+    </app-root>
+    <script type="text/javascript" src="runtime.38f68179699d79cad008.js"></script>
+    <script type="text/javascript" src="polyfills.20130909a8305dae1e58.js"></script>
+    <script type="text/javascript" src="main.1f0279e9543f3dcf63a3.js"></script>
+</body>

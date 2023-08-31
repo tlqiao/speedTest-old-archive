@@ -30,7 +30,7 @@ app.get('/api/js/sendTemplateFile', async (req, res) => {
 
 app.post('/api/js/generateCaseCode', async (req, res) => {
     const {apiName, parameterizedFields} = req.body;
-    const code = generateCaseCode(apiName, parameterizedFields);
+    const code = await generateCaseCode(apiName, parameterizedFields);
     let result = {};
     result.code = code;
     res.send(result);

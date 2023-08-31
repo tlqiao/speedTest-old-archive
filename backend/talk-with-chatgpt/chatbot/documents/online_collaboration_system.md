@@ -1,0 +1,61 @@
+Foraging是一个基于白板的在线协作系统。
+
+主要persona 可以分成两类：facilitator和participant。 facilitator是协作的组织者和主持人，负责设计和把控整个facilitated session的流程。 participant是facilitated session中参与讨论，提供输入的人。 在一个facilitated session中，participant通常都多于一人，而facilitator也可以不止一人。
+
+facilitator的主要诉求有如下几点：
+
+facilitated session操作有序
+facilitated session过程中自然地产生 结构化数据
+facilitated session操作有序 是通过以下方式实现的：
+
+facilitated session可以按预先设计好的step执行
+在step执行中，白板上的element的交互行为受permission控制
+在不同的step中，同样的element可能具有不同的行为
+permission包含：movable, editable, selectable等
+设计好的step，可固化为playbook
+facilitated session过程中自然地产生 structural data，是通过以下方式实现的：
+
+将 structural data中的信息与 UI元素对应。其中
+structural data的列, 对应为tag(由container提供)，或facilitator可编辑的自定义字段
+structural data的行，可以在白板上存在多个 视觉化身，比如 data entry sticky note
+在建立了上述对应关系之后，对于UI的操作，就是对于 结构化数据 的操作。比如，将结构化数据表一行的 视觉化身 拖入 container，就相当于为该行数据打tag
+structural data 可以看作是facilitated session中的 被所有facilitator共享的数据
+
+任意时刻 facilitator 都可以修改 结构化数据
+结构化数据 可以通过上传csv文件 批量导入
+白板上主要有三大类元素可以被使用：
+
+1是data sticky，每新建一个data sticky就会facilitator数据表中产生一行对应的数据
+2是container，container被用来给数据打标签，当一个data sticky被移入container，facilitator就能收集到被打上标签的 structural data
+3是non-data sticky，它的创建不会在数据表中产生数据，被移入container后，也不会和container产生关联
+基于白板的协作
+
+多个participant在白板上协作，彼此能实时看到最新的修改
+participant可以在白板上添加元素用以表达自己的想法
+participant可以移动、旋转、拉伸、新建、删除元素，还可以修改元素上的文字
+多个participant在白板上的操作，会汇聚为一条同一的时间线。当undo/redo是，如果时间线上同一元素的前一个事件，不是由自己触发的，则不能undo。
+structural data 可以通过上传csv文件 批量导入
+对白板元素的删除行为
+
+当participant在白板上可以删除任意元素，删除成功，该元素从白板上消失
+当participant在白板上删除一个data entry sticky note，该元素从白板上消失，但是facilitator数据表中对应的数据行不会被删除
+当participant在白板上删除一个container，该元素从白板消失，并且facilitator数据表中对应数据的tag也会消失
+对白板元素的单个移动行为
+
+将一个data sticky移入container，代表给数据打tag，The data stiky will be associated with the container
+将一个container中的associated data sticky移出container后，该data sticky和该container的关联解除
+将一个non-data sticky元素移入container，该元素和container不产生关联
+移动一个container时，该 container中的associated data sticky会跟随container一起移动
+对白板元素的多选行为
+
+participant可以同时选中同个container内的多个data sticky
+participant可以同时选中container以及container外白板上的其他元素
+participant不可以同时选中container内的associated data sticky和container外的元素
+participant不可以同时选中不同container内的associated data sticky
+多选移动行为
+
+同时可以移动多个元素的前提是participant已经成功同时选中了多个元素
+
+当多选的元素全为data stikey时，participant可以将他们一起移入或移出container
+
+当多选的元素既有data stikey又有non-data sticky时，participant不可以将其中的data sticky移入container

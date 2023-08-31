@@ -1,0 +1,9 @@
+Requirement 1: Multi-tenancy - The system should manage multiple tenants, where each tenant represents an enterprise using Saas services.
+
+Requirement 2: Personnel and Organizational Management - Customer enterprises have multiple development centers, each with several development teams. Additionally, there are company departments such as HR and Finance. The system should enable adding, updating, and deleting these departments, as well as performing the same actions for employees. Employees can be assigned to departments, with each employee belonging to only one department.
+
+Requirement 3: Project Management - A tenant enterprise can have multiple clients. The system should allow adding, updating, and deleting client information. Each client is assigned a client manager. Tenants can sign multiple contracts with their clients, and the system should support adding, updating, and deleting contract information. Each contract has a salesperson responsible for it. Contracts can start and end, and each contract can have multiple projects associated with it. The system should facilitate adding, updating, and deleting project information. Each project has a project manager, and projects can start and end with start and end dates being recorded.
+
+Requirement 4: Personnel Allocation - The system should allow assigning and removing personnel from projects. Personnel can participate in multiple projects simultaneously, and each project can have multiple participants. The system needs to track the percentage of time each person invests.
+
+Requirement 5: Time Entry - Employees are required to log their work hours weekly. They should record which project they worked on each day, along with the time spent. The system should enable querying and modifying time entries, as well as adding notes to time entries."
