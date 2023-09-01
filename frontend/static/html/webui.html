@@ -111,9 +111,9 @@
                     console.error('Error occurred:', error);
                 });
         });
-    const testTool = document.getElementById("testFramework").value
-    let outputLocator = document.getElementById("outputLocators")
-    document.getElementById("generateStepFunction").addEventListener("submit", async function (event) {
+    const testTool = document.getElementById("testFramework").value;
+    let outputLocator = document.getElementById("outputLocators");
+    document.getElementById("generateLocators").addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent form submission
         const form = event.target;
         const button = document.getElementById('generateLocatorButton');
