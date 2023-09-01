@@ -8,4 +8,4 @@
 
 **testdata目录是用于使用工具的测试数据**  
 
-others里面是一个接口的request body和response body，在生成接口测试、契约测试、mock server的mapping文件时，需要输入接口相关信息，可以使用这里的测试数据
+testdata/others.txt里面是一个接口的request body和response body，在生成接口测试、契约测试、mock server的mapping文件时，需要输入接口相关信息，可以使用这里的测试数据
