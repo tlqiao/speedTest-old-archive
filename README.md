@@ -24,8 +24,10 @@ testdata/others.txt里面是一个接口的request body和response body，在生
 * docker pull tlqiao/speedtest-frontend:latest
 * docker pull tlqiao/speedtest-backend-chatgpt:latest
 * 创建自定义网络，create network my-network
-* 启动backend-js后端服务，docker run --name backend-js-server -d -p 9090:9090 --network my-network tlqiao/speedtest-backend-js:latest
+* 启动backend-js后端服务，docker run --name backend-js-server -d -p 9090:9090 --network my-network tlqiao/speedtest-backend-js:v0.2
+* check backend-js服务使用成功部署，curl http://localhost:9090/health-check
 * 启动backend-chatgpt后端服务,chatgpt中需要通过环境变量传入OPENAI_API_KEY
-* docker run --name backend-chatgpt-server -d -p 8090:8090 -e OPENAI_API_KEY=your openai api key --network my-network tlqiao/speedtest-backend-chatgpt:latest
+* docker run --name backend-chatgpt-server -d -p 8090:8090 -e OPENAI_API_KEY=your openai api key --network my-network tlqiao/speedtest-backend-chatgpt:v0.2
+* check backend-js服务使用成功部署，curl http://localhost:8090/health-check
 * 启动frontend服务，在启动frontend服务时，通过环境变量方式，制定后端服务地址。 
-* docker run --name frontend -d -p 3000:3000 -e BACKEND_SERVER=backend-js-server -e AICHAT_SERVER=backend-chatgpt-server --network my-network tlqiao/speedtest-frontend:latest
+* docker run --name frontend -d -p 3000:3000 -e BACKEND_SERVER=backend-js-server -e AICHAT_SERVER=backend-chatgpt-server --network my-network tlqiao/speedtest-frontend:v0.3
