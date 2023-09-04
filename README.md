@@ -19,15 +19,23 @@ testdata/others.txt里面是一个接口的request body和response body，在生
 
 
 **Docker方式在本地部署**
-* pull image
+***pull image***
 * docker pull tlqiao/speedtest-backend-js:v0.3
 * docker pull tlqiao/speedtest-frontend:v0.2
 * docker pull tlqiao/speedtest-backend-chatgpt:v0.2
+
+***创建自定义网络***
 * 创建自定义网络，create network my-network
+
+***启动backend-js后端服务**
 * 启动backend-js后端服务，docker run --name backend-js-server -d -p 9090:9090 --network my-network tlqiao/speedtest-backend-js:v0.2
 * check backend-js服务是否部署成功，curl http://localhost:9090/health-check
+
+***启动backend-chatgpt后端服务***
 * 启动backend-chatgpt后端服务,chatgpt中需要通过环境变量传入OPENAI_API_KEY，服务使用的是gpt3.5的api-key
 * docker run --name backend-chatgpt-server -d -p 8090:8090 -e OPENAI_API_KEY=your openai api key --network my-network tlqiao/speedtest-backend-chatgpt:v0.2
-* check backend-js服务是否部署成功，curl http://localhost:8090/health-check
+* check backend-chatgpt服务是否部署成功，curl http://localhost:8090/health-check
+
+***启动frontend服务***
 * 启动frontend服务，在启动frontend服务时，通过环境变量方式，指定后端服务地址。 
 * docker run --name frontend -d -p 3000:3000 -e BACKEND_SERVER=backend-js-server -e AICHAT_SERVER=backend-chatgpt-server --network my-network tlqiao/speedtest-frontend:v0.3
