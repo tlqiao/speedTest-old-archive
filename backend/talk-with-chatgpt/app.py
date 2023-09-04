@@ -109,6 +109,9 @@ def write_unit_test_by_chatGPT():
     }
     return jsonify(response_data)
 
+@app.route('/health-check', methods=['GET'])
+def hello():
+    return "This is talk-with-chatWithGPT server"
 
 # Run the application
 if __name__ == '__main__':

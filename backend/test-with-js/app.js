@@ -35,6 +35,10 @@ app.post('/api/js/generateCaseCode', async (req, res) => {
     result.code = code;
     res.send(result);
 })
+
+app.get('/health-check',()=> {
+    return "Hello,this is test-with-js server"
+})
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
