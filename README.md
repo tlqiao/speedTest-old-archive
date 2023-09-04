@@ -9,3 +9,22 @@
 **testdata目录是用于使用工具的测试数据**  
 
 testdata/others.txt里面是一个接口的request body和response body，在生成接口测试、契约测试、mock server的mapping文件时，需要输入接口相关信息，可以使用这里的测试数据
+
+
+**本地启动应用**
+* 拉取代码
+* cd frontend, node ./app.js,frontend应用监听在3000端口
+* cd test-with-js, node ./app.js, test-with-js应用监听在9090端口
+* cd talk-with-chatgpt, python ./app.py, talk-with-chatgpt应用监听在8090端口
+
+
+**Docker方式在本地部署**
+* pull image
+* docker pull tlqiao/speedtest-backend-js:latest
+* docker pull tlqiao/speedtest-frontend:latest
+* docker pull tlqiao/speedtest-backend-chatgpt:latest
+* 创建自定义网络，create network my-network
+* 启动backend-js后端服务，docker run --name backend-js-server -d -p 9090:9090 --network my-network tlqiao/speedtest-backend-js:latest
+* 启动backend-chatgpt后端服务，docker run --name backend-chatgpt-server -d -p 8090:8090 --network my-network tlqiao/speedtest-backend-chatgpt:latest
+* 启动frontend服务，在启动frontend服务时，通过环境变量方式，制定后端服务地址。 
+* docker run --name frontend -d -p 3000:3000 -e BACKEND_SERVER=backend-js-server -e AICHAT_SERVER=backend-chatgpt-server --network my-network tlqiao/speedtest-frontend:latest

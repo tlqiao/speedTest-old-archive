@@ -22,6 +22,7 @@ apiTestRouter.post('/api/generateApiCallCode', async(req, res) => {
         return res.status(400).send({error: 'Invalid request'});
     }
     backendUrl = getBackendServerUrl(req.body.language);
+    console.log(backendUrl)
     await axios.post(`${backendUrl}/generateApiCallCode`, req.body.apiInfo)
         .then(response => {
             return res.send(response.data)

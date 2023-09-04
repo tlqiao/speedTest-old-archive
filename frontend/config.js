@@ -1,8 +1,10 @@
+const backendServer = process.env.BACKEND_SERVER || 'localhost';
+const aiServer = process.env.AICHAT_SERVER || 'localhost';
 const config = {
     backendUrl: {
-        testWithJsUrl: "http://localhost:9090/api/js",
-        testWithPythonUrl: "http://localhost:9091/api/python",
-        chatWithGPTServerUrl: "http://localhost:8090/chatWithGPT"
+        testWithJsUrl: `http://${backendServer}:9090/api/js`,
+        testWithPythonUrl: `http://${backendServer}:9091/api/python`,
+        chatWithGPTServerUrl: `http://${aiServer}:8090/chatWithGPT`
     }
 }
 
